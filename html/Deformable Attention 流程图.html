@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deformable Attention 流程图</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .flowchart {
+            position: relative;
+            padding: 20px;
+        }
+        
+        .step {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin: 20px auto;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #764ba2;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .step-formula {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #667eea;
+            margin: -10px auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            left: 350px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .step:hover .tooltip {
+            display: block;
+        }
+        
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 10px solid #667eea;
+        }
+        
+        .tooltip h3 {
+            margin: 0 0 10px 0;
+            color: #667eea;
+            font-size: 16px;
+        }
+        
+        .tooltip .math {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+            text-align: center;
+            color: #333;
+            border-left: 3px solid #667eea;
+        }
+        
+        .tooltip .description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .input-box {
+            background: #fff8dc;
+            border: 3px solid #ffa500;
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin: 20px auto;
+            width: 250px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(255,165,0,0.2);
+        }
+        
+        .parallel-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 30px;
+        }
+        
+        .multi-head {
+            background: #f0f8ff;
+            border: 2px dashed #4682b4;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deformable Attention 计算流程</h1>
+        
+        <div class="flowchart">
+            <!-- 输入 -->
+            <div class="input-box">
+                <div class="step-title">输入查询特征</div>
+                <div class="step-formula">z<sub>q</sub> ∈ ℝ<sup>d</sup></div>
+            </div>
+            
+            <!-- 步骤1: 偏移量预测 -->
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-title">偏移量预测</div>
+                <div class="step-formula">Δp = Linear<sub>offset</sub>(z<sub>q</sub>)</div>
+                <div class="tooltip">
+                    <h3>偏移量预测</h3>
+                    <div class="math">
+                        Δp<sub>mqk</sub> = tanh(W<sub>offset</sub> · z<sub>q</sub> + b<sub>offset</sub>) · s
+                    </div>
+                    <div class="description">
+                        通过线性变换预测M个头、K个采样点的2D偏移量。<br>
+                        • 输出维度: [M, K, 2]<br>
+                        • tanh限制偏移范围<br>
+                        • s为缩放因子
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 步骤2: 注意力权重预测 -->
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">注意力权重预测</div>
+                <div class="step-formula">A = Softmax(Linear<sub>attn</sub>(z<sub>q</sub>))</div>
+                <div class="tooltip">
+                    <h3>注意力权重计算</h3>
+                    <div class="math">
+                        A<sub>mqk</sub> = softmax<sub>k</sub>(W<sub>attn</sub> · z<sub>q</sub> + b<sub>attn</sub>)
+                    </div>
+                    <div class="description">
+                        预测每个采样点的注意力权重。<br>
+                        • 输出维度: [M, K]<br>
+                        • Softmax确保Σ<sub>k</sub>A<sub>mqk</sub> = 1<br>
+                        • 每个头独立计算权重
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 参考位置输入 -->
+            <div class="parallel-box">
+                <div class="input-box" style="width: 200px;">
+                    <div class="step-title">参考位置</div>
+                    <div class="step-formula">p<sub>q</sub> ∈ ℝ<sup>2</sup></div>
+                </div>
+                
+                <!-- 步骤3: 采样位置计算 -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">采样位置计算</div>
+                    <div class="step-formula">p<sub>mqk</sub> = p<sub>q</sub> + Δp<sub>mqk</sub></div>
+                    <div class="tooltip">
+                        <h3>最终采样位置</h3>
+                        <div class="math">
+                            p<sub>mqk</sub> = p<sub>q</sub> + Δp<sub>mqk</sub>
+                        </div>
+                        <div class="description">
+                            将参考位置与偏移量相加得到采样位置。<br>
+                            • p<sub>q</sub>: 归一化坐标[0,1]<br>
+                            • 转换为像素坐标: p · [H, W]<br>
+                            • M×K个采样点位置
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 特征图输入和采样 -->
+            <div class="parallel-box">
+                <div class="input-box" style="width: 200px;">
+                    <div class="step-title">特征图</div>
+                    <div class="step-formula">x ∈ ℝ<sup>H×W×d</sup></div>
+                </div>
+                
+                <!-- 步骤4: 双线性插值 -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">双线性插值采样</div>
+                    <div class="step-formula">x(p<sub>mqk</sub>)</div>
+                    <div class="tooltip">
+                        <h3>双线性插值</h3>
+                        <div class="math">
+                            x(p) = Σ<sub>i,j</sub> w<sub>ij</sub> · x<sub>ij</sub>
+                        </div>
+                        <div class="description">
+                            从特征图中采样特征值。<br>
+                            • 4个邻近像素加权平均<br>
+                            • w<sub>ij</sub>基于距离计算<br>
+                            • 支持亚像素精度
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 步骤5: 值投影 -->
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-title">值投影</div>
+                <div class="step-formula">V<sub>mqk</sub> = W<sub>m</sub>' · x(p<sub>mqk</sub>)</div>
+                <div class="tooltip">
+                    <h3>值投影变换</h3>
+                    <div class="math">
+                        V<sub>mqk</sub> = W<sub>m</sub>' · x(p<sub>mqk</sub>)
+                    </div>
+                    <div class="description">
+                        将采样特征投影到低维空间。<br>
+                        • 输入: d维特征<br>
+                        • 输出: d/M维特征<br>
+                        • 每个头独立的投影矩阵
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 步骤6: 注意力聚合 -->
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-title">注意力聚合</div>
+                <div class="step-formula">H<sub>m</sub> = Σ<sub>k</sub> A<sub>mqk</sub> · V<sub>mqk</sub></div>
+                <div class="tooltip">
+                    <h3>加权聚合</h3>
+                    <div class="math">
+                        H<sub>m</sub> = Σ<sub>k=1</sub><sup>K</sup> A<sub>mqk</sub> · V<sub>mqk</sub>
+                    </div>
+                    <div class="description">
+                        使用注意力权重聚合K个采样点。<br>
+                        • 每个头独立聚合<br>
+                        • 输出维度: d/M<br>
+                        • 保持特征的加权和
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 步骤7: 输出投影 -->
+            <div class="step">
+                <div class="step-number">7</div>
+                <div class="step-title">输出投影</div>
+                <div class="step-formula">Head<sub>m</sub> = W<sub>m</sub> · H<sub>m</sub></div>
+                <div class="tooltip">
+                    <h3>输出投影</h3>
+                    <div class="math">
+                        Head<sub>m</sub> = W<sub>m</sub> · H<sub>m</sub> + b<sub>m</sub>
+                    </div>
+                    <div class="description">
+                        将聚合结果投影回原始维度。<br>
+                        • 输入: d/M维<br>
+                        • 输出: d维<br>
+                        • 恢复特征维度
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrow"></div>
+            
+            <!-- 多头融合 -->
+            <div class="multi-head">
+                <div class="step-number" style="position: static; margin: 0 auto 10px;">8</div>
+                <div class="step-title">多头融合</div>
+                <div class="step-formula">Output = Σ<sub>m=1</sub><sup>M</sup> Head<sub>m</sub></div>
+                <div style="margin-top: 10px; color: #666;">
+                    将M个注意力头的输出相加，得到最终的d维输出特征
+                </div>
+            </div>
+        </div>
+    </div>
+<script>window.parent.postMessage({ action: "ready" }, "*"); 
+ 
+window.console = new Proxy(console, {
+  get(target, prop) {
+    if (['log', 'warn', 'error'].includes(prop)) {
+      return new Proxy(target[prop], {
+        apply(fn, thisArg, args) {
+          fn.apply(thisArg, args);
+          window.parent.postMessage({ action: 'console', 
+            type: prop, 
+            args: args.map((arg) => {
+              try {
+                return JSON.stringify(arg).replace(/^["']|["']$/g, '');
+              } catch (e) {
+                return arg;
+              }
+            }) 
+          }, '*');
+        }
+      });
+    }
+    return target[prop];
+  }
+});
+</script></body>
+</html>
