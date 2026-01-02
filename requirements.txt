@@ -1,0 +1,33 @@
+# Jupyter PPT
+jupyter>=1.0.0
+rise>=5.7.1                    # Reveal.js - Jupyter/IPython Slideshow Extension (PPT)
+jupyter-contrib-nbextensions>=0.5.1  # Jupyter extensions
+ipython>=7.0.0
+ipywidgets>=7.6.0
+
+# torch
+torch>=1.7.0
+torchvision>=0.8.0
+numpy>=1.19.0
+matplotlib>=3.3.0
+
+# COCO API
+pycocotools>=2.0.0
+git+https://github.com/cocodataset/panopticapi.git#egg=panopticapi
+
+# tools 
+scipy>=1.5.0
+termcolor>=1.1.0
+addict>=2.4.0
+yapf>=0.30.0
+timm>=0.4.0
+
+# torchsummary
+torchsummary>=1.5.1
+
+# submitit
+submitit>=1.0.0
+
+# onnx
+onnx>=1.9.0
+onnxruntime>=1.7.0

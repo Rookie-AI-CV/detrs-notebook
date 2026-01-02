@@ -1,0 +1,27 @@
+[submodule "code/detrex"]
+	path = code/detrex
+	url = git@github.com:Rookie-AI-CV/detrex.git
+[submodule "code/detr"]
+	path = code/detr
+	url = git@github.com:Rookie-AI-CV/detr.git
+[submodule "code/ConditionalDETR"]
+	path = code/ConditionalDETR
+	url = git@github.com:Rookie-AI-CV/ConditionalDETR.git
+[submodule "code/DAB-DETR"]
+	path = code/DAB-DETR
+	url = git@github.com:Rookie-AI-CV/DAB-DETR.git
+[submodule "code/DINO"]
+	path = code/DINO
+	url = git@github.com:Rookie-AI-CV/DINO.git
+[submodule "code/RT-DETR"]
+	path = code/RT-DETR
+	url = git@github.com:Rookie-AI-CV/RT-DETR.git
+[submodule "code/D-FINE"]
+	path = code/D-FINE
+	url = git@github.com:Rookie-AI-CV/D-FINE.git
+[submodule "code/DEIM"]
+	path = code/DEIM
+	url = git@github.com:Rookie-AI-CV/DEIMv2.git
+[submodule "code/AnchorDETR"]
+	path = code/AnchorDETR
+	url = git@github.com:Rookie-AI-CV/AnchorDETR.git
