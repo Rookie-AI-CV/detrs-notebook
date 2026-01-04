@@ -1,4 +1,5 @@
 # Jupyter PPT
+notebook>=6.0.0,<7.0.0        
 jupyter>=1.0.0
 rise>=5.7.1                    # Reveal.js - Jupyter/IPython Slideshow Extension (PPT)
 jupyter-contrib-nbextensions>=0.5.1  # Jupyter extensions

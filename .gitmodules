@@ -25,3 +25,9 @@
 [submodule "code/AnchorDETR"]
 	path = code/AnchorDETR
 	url = git@github.com:Rookie-AI-CV/AnchorDETR.git
+[submodule "code/Deformable-DETR"]
+	path = code/Deformable-DETR
+	url = git@github.com:Rookie-AI-CV/Deformable-DETR.git
+[submodule "code/DN-DETR"]
+	path = code/DN-DETR
+	url = git@github.com:Rookie-AI-CV/DN-DETR.git

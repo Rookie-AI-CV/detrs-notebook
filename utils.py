@@ -307,10 +307,7 @@ def compare_encoding_methods():
     plt.show()  
 
 
-# 运行所有可视化  
-if __name__ == "__main__":  
-    print("🎨 Starting Sine Position Encoding Visualization...")  
-    
+if __name__ == "__main__":   
     # 主要可视化 - 展示编码的各个步骤  
     visualize_sine_position_encoding()  
     
@@ -322,5 +319,3 @@ if __name__ == "__main__":
     
     # 不同参数比较  
     compare_encoding_methods()  
-    
-    print("✅ Visualization complete!")
