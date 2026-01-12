@@ -46,6 +46,7 @@ detrs-notebook/
 │   └── related/              # 相关研究
 ├── code/                     # 代码实现（Git Submodule）
 │   ├── detr/
+│   ├── Deformable-DETR/
 │   ├── ConditionalDETR/
 │   ├── DAB-DETR/
 │   ├── DINO/
@@ -53,7 +54,8 @@ detrs-notebook/
 │   ├── D-FINE/
 │   ├── DEIM/
 │   ├── AnchorDETR/
-│   └── detrex/
+│   ├── detrex/
+│   └── pytorch-deform-conv-v2/  # 可变形卷积实现
 ├── imgs/
 └── utils.py
 ```
@@ -95,7 +97,7 @@ detrs-notebook/
 | 提交日期 | 算法名称 | PDF链接 | 中英文对照版 | 中文版 | 代码仓库 |
 |---------|---------|---------|-------------|--------|---------|
 | 2020.05.23 | **DETR** | [End-to-End Object Detection with Transformers](./paper/detr/End-to-End%20Object%20Detection%20with%20Transformers.pdf) | [dual](./paper/detr/End-to-End%20Object%20Detection%20with%20Transformers-dual.pdf) | [mono](./paper/detr/End-to-End%20Object%20Detection%20with%20Transformers-mono.pdf) | [detr](./code/detr) |
-| 2020.10.08 | **Deformable DETR** | [DEFORMABLE DETR](./paper/detr/DEFORMABLE%20DETR.pdf) | [dual](./paper/detr/DEFORMABLE%20DETR-dual.pdf) | [mono](./paper/detr/DEFORMABLE%20DETR-mono.pdf) | |
+| 2020.10.08 | **Deformable DETR** | [DEFORMABLE DETR](./paper/detr/DEFORMABLE%20DETR.pdf) | [dual](./paper/detr/DEFORMABLE%20DETR-dual.pdf) | [mono](./paper/detr/DEFORMABLE%20DETR-mono.pdf) | [Deformable-DETR](./code/Deformable-DETR) |
 | 2021.08.13 | **Conditional DETR** | [Conditional DETR for Fast Training Convergence](./paper/detr/Conditional%20DETR%20for%20Fast%20Training%20Convergence.pdf) | [dual](./paper/detr/Conditional%20DETR%20for%20Fast%20Training%20Convergence-dual.pdf) | [mono](./paper/detr/Conditional%20DETR%20for%20Fast%20Training%20Convergence-mono.pdf) | [ConditionalDETR](./code/ConditionalDETR) |
 | 2022.01.29 | **DAB-DETR** | [DAB-DETR](./paper/detr/DAB-DETR.pdf) | [dual](./paper/detr/DAB-DETR-dual.pdf) | [mono](./paper/detr/DAB-DETR-mono.pdf) | [DAB-DETR](./code/DAB-DETR) |
 | 2022.01.29 | **DN-DETR** | [DN-DETR](./paper/detr/DN-DETR.pdf) | [dual](./paper/detr/DN-DETR-dual.pdf) | [mono](./paper/detr/DN-DETR-mono.pdf) | |
@@ -104,7 +106,7 @@ detrs-notebook/
 | 2023.04.17 | **RT-DETR** | [RT-DETR](./paper/detr/RT-DETR.pdf) | [dual](./paper/detr/RT-DETR-dual.pdf) | [mono](./paper/detr/RT-DETR-mono.pdf) | [RT-DETR](./code/RT-DETR) |
 | 2024.07.24 | RT-DETRv2 | [RT-DETRv2 - Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer](./paper/detr/RT-DETRv2%20-%20Improved%20Baseline%20with%20Bag-of-Freebies%20for%20Real-Time%20Detection%20Transformer.pdf) | [dual](./paper/detr/RT-DETRv2%20-%20Improved%20Baseline%20with%20Bag-of-Freebies%20for%20Real-Time%20Detection%20Transformer-dual.pdf) | [mono](./paper/detr/RT-DETRv2%20-%20Improved%20Baseline%20with%20Bag-of-Freebies%20for%20Real-Time%20Detection%20Transformer-mono.pdf) | |
 | 2024.09.13 | RT-DETRv3 | [RT-DETRv3](./paper/detr/RT-DETRv3.pdf) | [dual](./paper/detr/RT-DETRv3-dual.pdf) | [mono](./paper/detr/RT-DETRv3-mono.pdf) | |
-| 2025.10.29 | RT-DETRv4 | [RT-DETRv4 - Painlessly Furthering Real-Time Object Detection with Vision Foundation Models](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models.pdf) | [dual](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models-dual.pdf) | [mono](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models-mono.pdf) | |
+| 2025.10.29 | RT-DETRv4 | [RT-DETRv4 -  Painlessly Furthering Real-Time Object Detection with Vision Foundation Models](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models.pdf) | [dual](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models-dual.pdf) | [mono](./paper/detr/RT-DETRv4%20-%20%20Painlessly%20Furthering%20Real-Time%20Object%20Detection%20with%20Vision%20Foundation%20Models-mono.pdf) | |
 | 2024.10.17 | **D-FINE** | [D-FINE](./paper/detr/D-FINE.pdf) | [dual](./paper/detr/D-FINE-dual.pdf) | [mono](./paper/detr/D-FINE-mono.pdf) | [D-FINE](./code/D-FINE) |
 | 2024.12.05 | **DEIM** | [DEIM - DETR with Improved Matching for Fast Convergence](./paper/detr/DEIM%20-%20DETR%20with%20Improved%20Matching%20for%20Fast%20Convergence.pdf) | [dual](./paper/detr/DEIM%20-%20DETR%20with%20Improved%20Matching%20for%20Fast%20Convergence-dual.pdf) | [mono](./paper/detr/DEIM%20-%20DETR%20with%20Improved%20Matching%20for%20Fast%20Convergence-mono.pdf) | [DEIM](./code/DEIM) |
 | 2025.09.25 | **DEIMv2** | [DEIMv2 - Real-Time Object Detection Meets DINOv3](./paper/detr/DEIMv2%20-%20Real-Time%20Object%20Detection%20Meets%20DINOv3.pdf) | [dual](./paper/detr/DEIMv2%20-%20Real-Time%20Object%20Detection%20Meets%20DINOv3-dual.pdf) | [mono](./paper/detr/DEIMv2%20-%20Real-Time%20Object%20Detection%20Meets%20DINOv3-mono.pdf) | [DEIM](./code/DEIM) |
@@ -115,21 +117,26 @@ detrs-notebook/
 
 | 提交日期 | 算法名称 | PDF链接 | 中英文对照版 | 中文版 | 代码仓库 |
 |---------|---------|---------|-------------|--------|---------|
-| 2019.11.11 | On the Relationship between Self-Attention and Convolutional Layers | [ON THE RELATIONSHIP BETWEEN SELF-ATTENTION](./paper/backbone/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION.pdf) | [dual](./paper/backbone/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION-dual.pdf) | [mono](./paper/backbone/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION-mono.pdf) | |
-| 2021.04.22 | DINOv1 | [DINOv1 - Emerging Properties in Self-Supervised Vision Transformers](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers.pdf) | [dual](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers-dual.pdf) | [mono](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers-mono.pdf) | |
-| 2023.04.04 | DINOv2 | [DINOv2 - Learning Robust Visual Features](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features.pdf) | [dual](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features-dual.pdf) | [mono](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features-mono.pdf) | |
-| 2024.11.28 | DINOv3 | [DINOv3](./paper/backbone/DINOv3.pdf) | [dual](./paper/backbone/DINOv3-dual.pdf) | [mono](./paper/backbone/DINOv3-mono.pdf) | |
+| 2020.10.22 | **ViT** | [ViT - An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](./paper/backbone/ViT%20-%20AN%20IMAGE%20IS%20WORTH%2016X16%20WORDS%20-%20TRANSFORMERS%20FOR%20IMAGE%20RECOGNITION%20AT%20SCALE.pdf) | [dual](./paper/backbone/ViT%20-%20AN%20IMAGE%20IS%20WORTH%2016X16%20WORDS%20-%20TRANSFORMERS%20FOR%20IMAGE%20RECOGNITION%20AT%20SCALE-dual.pdf) | [mono](./paper/backbone/ViT%20-%20AN%20IMAGE%20IS%20WORTH%2016X16%20WORDS%20-%20TRANSFORMERS%20FOR%20IMAGE%20RECOGNITION%20AT%20SCALE-mono.pdf) | |
+| 2021.03.25 | **Swin Transformer** | [Swin Transformer - Hierarchical Vision Transformer using Shifted Windows](./paper/backbone/Swin%20Transformer%20-%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows.pdf) | [dual](./paper/backbone/Swin%20Transformer%20-%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows-dual.pdf) | [mono](./paper/backbone/Swin%20Transformer%20-%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows-mono.pdf) | |
+| 2021.04.22 | **DINOv1** | [DINOv1 - Emerging Properties in Self-Supervised Vision Transformers](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers.pdf) | [dual](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers-dual.pdf) | [mono](./paper/backbone/DINOv1%20-%20Emerging%20Properties%20in%20Self-Supervised%20Vision%20Transformers-mono.pdf) | |
+| 2023.04.04 | **DINOv2** | [DINOv2 - Learning Robust Visual Features](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features.pdf) | [dual](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features-dual.pdf) | [mono](./paper/backbone/DINOv2%20-%20Learning%20Robust%20Visual%20Features-mono.pdf) | |
+| 2024.11.28 | **DINOv3** | [DINOv3](./paper/backbone/DINOv3.pdf) | [dual](./paper/backbone/DINOv3-dual.pdf) | [mono](./paper/backbone/DINOv3-mono.pdf) | |
 
 ### 第四部分：相关研究（扩展阅读）
 
 | 提交日期 | 算法名称 | PDF链接 | 中英文对照版 | 中文版 | 代码仓库 |
 |---------|---------|---------|-------------|--------|---------|
+| 2001.08.13 | Viola–Jones | [Viola–Jones - Rapid Object Detection using a Boosted Cascade of Simple](./paper/related/Viola–Jones%20-%20Rapid%20Object%20Detection%20using%20a%20Boosted%20Cascade%20of%20Simple.pdf) | [dual](./paper/related/Viola–Jones%20-%20Rapid%20Object%20Detection%20using%20a%20Boosted%20Cascade%20of%20Simple-dual.pdf) | [mono](./paper/related/Viola–Jones%20-%20Rapid%20Object%20Detection%20using%20a%20Boosted%20Cascade%20of%20Simple-mono.pdf) | |
+| 2004.11.05 | Lowe SIFT | [Lowe SIFT - Distinctive Image Features](./paper/related/Lowe%20SIFT%20-%20Distinctive%20Image%20Features.pdf) | [dual](./paper/related/Lowe%20SIFT%20-%20Distinctive%20Image%20Features-dual.pdf) | [mono](./paper/related/Lowe%20SIFT%20-%20Distinctive%20Image%20Features-mono.pdf) | |
+| 2019.11.11 | On the Relationship between Self-Attention and Convolutional Layers | [ON THE RELATIONSHIP BETWEEN SELF-ATTENTION](./paper/related/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION.pdf) | [dual](./paper/related/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION-dual.pdf) | [mono](./paper/related/ON%20THE%20RELATIONSHIP%20BETWEEN%20SELF-ATTENTION-mono.pdf) | |
 | 2020.11.05 | UP-DETR | [UP-DETR](./paper/related/UP-DETR.pdf) | [dual](./paper/related/UP-DETR-dual.pdf) | [mono](./paper/related/UP-DETR-mono.pdf) | |
-| 2021.06.04 | YOLOS | [YOLOS](./paper/related/YOLOS.pdf) | [dual](./paper/related/YOLOS-dual.pdf) | [mono](./paper/related/YOLOS-mono.pdf) | |
 | 2020.11.24 | TSP | [TSP](./paper/related/TSP.pdf) | [dual](./paper/related/TSP-dual.pdf) | [mono](./paper/related/TSP-mono.pdf) | |
-| 2021.05.01 | Rethinking Transformer-based Set Prediction (ICCV) | [Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper.pdf) | [dual](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper-dual.pdf) | [mono](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper-mono.pdf) | |
 | 2021.03.30 | You Only Look at One Sequence (NeurIPS) | [NeurIPS-2021-you-only-look-at-one-sequence-rethinking-transformer-in-vision-through-object-detection-Paper](./paper/related/NeurIPS-2021-you-only-look-at-one-sequence-rethinking-transformer-in-vision-through-object-detection-Paper.pdf) | [dual](./paper/related/NeurIPS-2021-you-only-look-at-one-sequence-rethinking-transformer-in-vision-through-object-detection-Paper-dual.pdf) | [mono](./paper/related/NeurIPS-2021-you-only-look-at-one-sequence-rethinking-transformer-in-vision-through-object-detection-Paper-mono.pdf) | |
+| 2021.05.01 | Rethinking Transformer-based Set Prediction (ICCV) | [Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper.pdf) | [dual](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper-dual.pdf) | [mono](./paper/related/Sun_Rethinking_Transformer-Based_Set_Prediction_for_Object_Detection_ICCV_2021_paper-mono.pdf) | |
+| 2021.06.04 | YOLOS | [YOLOS](./paper/related/YOLOS.pdf) | [dual](./paper/related/YOLOS-dual.pdf) | [mono](./paper/related/YOLOS-mono.pdf) | |
 | 2021.09.09 | PIX2SEQ | [PIX2SEQ](./paper/related/PIX2SEQ.pdf) | [dual](./paper/related/PIX2SEQ-dual.pdf) | [mono](./paper/related/PIX2SEQ-mono.pdf) | |
+| 2017.03.18 | **Deformable Convolutional Networks** | | | | [pytorch-deform-conv-v2](./code/pytorch-deform-conv-v2) |
 
 ## 数据集资源
 
@@ -137,10 +144,8 @@ detrs-notebook/
 
 | 提交日期 | 数据集名称 | 规模 | 类别数 | 论文PDF | 中英文对照版 | 中文版 | 官方链接 |
 |---------|-----------|------|--------|---------|-------------|--------|---------|
-| 2007/2012 | **Pascal VOC** | ~11K 图像 | 20 | [PDF](./paper/datasets/Pascal-VOC-The-PASCAL-Visual-Object-Classes-Challenge.pdf) | | | [Pascal VOC](http://host.robots.ox.ac.uk/pascal/VOC/) |
 | 2014.05.01 | **COCO** | 330K 图像，2.5M 实例 | 80 | [PDF](./paper/datasets/Microsoft-COCO-Common-Objects-in-Context.pdf) | [dual](./paper/datasets/Microsoft-COCO-Common-Objects-in-Context-dual.pdf) | [mono](./paper/datasets/Microsoft-COCO-Common-Objects-in-Context-mono.pdf) | [COCO Dataset](https://cocodataset.org/) |
 | 2018.11.02 | **Open Images** | 9M 图像，36M 边界框 | 601 | [PDF](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification.pdf) | [dual](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification-dual.pdf) | [mono](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification-mono.pdf) | [Open Images](https://storage.googleapis.com/openimages/web/index.html) |
-| 2019.08.08 | **LVIS** | 164K 图像，2.2M 实例 | 1203 | [PDF](./paper/datasets/LVIS-A-Dataset-for-Large-Vocabulary-Instance-Segmentation.pdf) | | | [LVIS](https://www.lvisdataset.org/) |
 | 2019.05.09 | **Objects365** | 2M 图像，30M 边界框 | 365 | [PDF](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection.pdf) | [dual](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection-dual.pdf) | [mono](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection-mono.pdf) | [Objects365](https://www.objects365.org/) |
 
 ### 基础模型预训练数据集
@@ -150,17 +155,13 @@ detrs-notebook/
 | 2009.06 | **ImageNet-1K/21K** | 1.2M/14M 图像 | 图像分类预训练 | [PDF](./paper/datasets/ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge.pdf) | [dual](./paper/datasets/ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge-dual.pdf) | [mono](./paper/datasets/ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge-mono.pdf) | [ImageNet](https://www.image-net.org/) |
 | 2018.11.02 | **Open Images** | 9M 图像，601 类 | 大规模目标检测预训练 | [PDF](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification.pdf) | [dual](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification-dual.pdf) | [mono](./paper/datasets/Open-Images-A-public-dataset-for-large-scale-multi-label-and-multi-class-image-classification-mono.pdf) | [Open Images](https://storage.googleapis.com/openimages/web/index.html) |
 | 2019.05.09 | **Objects365** | 2M 图像，365 类 | 目标检测预训练 | [PDF](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection.pdf) | [dual](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection-dual.pdf) | [mono](./paper/datasets/Objects365%20-%20A%20Large-scale,%20High-quality%20Dataset%20for%20Object%20Detection-mono.pdf) | [Objects365](https://www.objects365.org/) |
-| 2022.03.10 | **LAION-5B** | 5.85B 图像-文本对 | 多模态预训练（CLIP等） | [PDF](./paper/datasets/LAION-5B-An-open-large-scale-dataset-for-training-next-generation-image-text-models.pdf) | | | [LAION](https://laion.ai/) |
 
 ### 数据集说明
 
 - **COCO**: 最常用的目标检测基准数据集，包含 80 个常见对象类别
-- **Pascal VOC**: 早期目标检测的标准基准，包含 20 个类别
 - **Objects365**: 大规模目标检测数据集，包含 365 个类别，常用于预训练
 - **ImageNet**: 图像分类的标准基准，ImageNet-1K 用于常规预训练，ImageNet-21K 用于大规模预训练
 - **Open Images**: 大规模多标签数据集，包含 9M 图像和 36M 边界框
-- **LVIS**: 长尾分布的大规模实例分割数据集，包含 1203 个类别
-- **LAION-5B**: 大规模图像-文本对数据集，用于训练 CLIP 等多模态模型
 
 ## 说明
 

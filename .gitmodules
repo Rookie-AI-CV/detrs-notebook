@@ -31,3 +31,6 @@
 [submodule "code/DN-DETR"]
 	path = code/DN-DETR
 	url = git@github.com:Rookie-AI-CV/DN-DETR.git
+[submodule "code/pytorch-deform-conv-v2"]
+	path = code/pytorch-deform-conv-v2
+	url = git@github.com:Rookie-AI-CV/pytorch-deform-conv-v2.git
